@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { Menu, X, Instagram, Facebook, Mail, Phone, Send, MessageCircle } from 'lucide-react';
+import { Menu, X, Instagram, Facebook, Mail, Phone, Send, MessageCircle, Volume2, VolumeX } from 'lucide-react';
 import { ARTWORKS, NAV_LINKS } from './constants';
 import { SafeImage } from './components/SafeImage';
 
@@ -19,6 +19,23 @@ export default function App() {
     target: heroRef,
     offset: ["start start", "end start"]
   });
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(new Audio("https://soundcloud.com/sreenath-narayan/meditation-flute.mp3"));
+
+  useEffect(() => {
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.4;
+  }, []);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(err => console.log("Audio play blocked", err));
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   const blobY1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const blobY2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
@@ -162,8 +179,8 @@ export default function App() {
                   </span>
                 </div>
                 
-                <h1 className="text-[10vw] lg:text-[6.5vw] font-black leading-[0.8] tracking-tighter text-brand-dark mb-12">
-                   <div className="overflow-hidden">
+                <h1 className="text-[10vw] lg:text-[6.5vw] font-black leading-[1.2] tracking-tighter text-brand-dark mb-12">
+                   <div className="overflow-hidden py-1">
                      <motion.span 
                        initial={{ y: "100%" }}
                        animate={{ y: 0 }}
@@ -173,7 +190,7 @@ export default function App() {
                        Every Wall
                      </motion.span>
                    </div>
-                   <div className="overflow-hidden flex items-center gap-6">
+                   <div className="overflow-hidden flex items-center gap-6 py-1">
                      <motion.span 
                        initial={{ y: "100%" }}
                        animate={{ y: 0 }}
@@ -189,7 +206,7 @@ export default function App() {
                         className="h-2 flex-grow bg-brand-dark/5 rounded-full overflow-hidden hidden md:block"
                      />
                    </div>
-                   <div className="overflow-hidden">
+                   <div className="overflow-hidden py-1">
                      <motion.span 
                        initial={{ y: "100%" }}
                        animate={{ y: 0 }}
@@ -671,6 +688,45 @@ export default function App() {
            <p className="text-[10px] font-bold tracking-widest text-brand-dark/20 uppercase">© 2026 Crafted with Soul</p>
         </div>
       </footer>
+
+      {/* Audio Toggle Floating Button */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        onClick={toggleAudio}
+        className="fixed bottom-8 left-8 z-[100] w-14 h-14 rounded-full bg-brand-dark text-white flex items-center justify-center shadow-2xl hover:bg-brand-pink transition-all group"
+      >
+        <AnimatePresence mode="wait">
+          {isPlaying ? (
+            <motion.div
+              key="playing"
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
+            >
+              <Volume2 size={24} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="muted"
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
+            >
+              <VolumeX size={24} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Subtle pulse animation when playing */}
+        {isPlaying && (
+          <motion.div
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 rounded-full bg-brand-pink -z-10"
+          />
+        )}
+      </motion.button>
 
       {/* Lightbox Modal */}
       <AnimatePresence>
