@@ -172,12 +172,7 @@ export default function App() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="h-px w-12 bg-brand-pink/30" />
-                  <span className="text-brand-pink font-bold uppercase tracking-[0.6em] text-[10px]">
-                    Kerala Mural & Acrylic Art
-                  </span>
-                </div>
+
                 
                 <h1 className="text-[10vw] lg:text-[6.5vw] font-black leading-[1.2] tracking-tighter text-brand-dark mb-12">
                    <div className="overflow-hidden py-1">
