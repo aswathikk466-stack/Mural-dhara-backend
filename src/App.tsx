@@ -247,54 +247,6 @@ export default function App() {
                 transition={{ duration: 1.5, ease: "easeOut" }}
                 className="relative w-full max-w-md h-[600px] flex items-center justify-center"
               >
-                {/* Floating Butterflies around the mug */}
-                <div className="absolute inset-0 z-10 pointer-events-none">
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={`butterfly-${i}`}
-                      initial={{ 
-                        x: Math.random() * 400 - 200, 
-                        y: Math.random() * 400 - 150,
-                        opacity: 0,
-                        scale: 0 
-                      }}
-                      animate={{ 
-                        opacity: [0, 1, 1, 0],
-                        scale: [1, 1.5, 1.5, 1],
-                        x: [
-                          Math.random() * 300 - 150, 
-                          Math.random() * 300 - 150, 
-                          Math.random() * 300 - 150
-                        ],
-                        y: [
-                          Math.random() * 300 - 150, 
-                          Math.random() * 300 - 150, 
-                          Math.random() * 300 - 150
-                        ],
-                        rotate: [0, 45, -45, 0]
-                      }}
-                      transition={{ 
-                        duration: 10 + Math.random() * 5, 
-                        repeat: Infinity, 
-                        ease: "linear",
-                        delay: i * 2 
-                      }}
-                      className="absolute left-1/2 top-1/2"
-                    >
-                      {/* Butterfly Wing Animation */}
-                      <motion.div
-                        animate={{ rotateY: [0, 80, 0] }}
-                        transition={{ duration: 0.2, repeat: Infinity, ease: "easeInOut" }}
-                        className="flex"
-                      >
-                        <svg viewBox="0 0 20 20" className="w-10 h-10 text-brand-pink fill-current drop-shadow-md">
-                          <path d="M10 10 C 10 10, 2 0, 0 5 C 0 10, 10 10, 10 10 C 10 10, 18 0, 20 5 C 20 10, 10 10, 10 10 Z" />
-                        </svg>
-                      </motion.div>
-                    </motion.div>
-                  ))}
-                </div>
-
                 {/* The Mug & Brushes (Main Focus) */}
                 <div className="relative z-20 mt-20 group scale-110">
                   {/* Floating brushes */}
