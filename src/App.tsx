@@ -48,7 +48,7 @@ export default function App() {
       {/* Navbar */}
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          scrolled ? 'bg-brand-cream/80 backdrop-blur-lg py-4 shadow-sm' : 'bg-transparent py-6'
+          scrolled ? 'bg-brand-cream/80 backdrop-blur-lg py-2 md:py-4 shadow-sm' : 'bg-transparent py-4 md:py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center text-brand-dark">
@@ -56,7 +56,7 @@ export default function App() {
             <SafeImage 
               src={logoUrl} 
               alt="Logo" 
-              className={`w-auto transition-all duration-500 ${scrolled ? 'h-25' : 'h-42'}`} 
+              className={`w-auto transition-all duration-500 ${scrolled ? 'h-12 md:h-24' : 'h-16 md:h-42'}`} 
             />
             <span className="font-roboto text-[10px] font-bold tracking-[0.4em] uppercase hidden sm:block opacity-60">MURAL DHARA</span>
           </a>
@@ -90,7 +90,7 @@ export default function App() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute top-20 left-6 right-6 bg-brand-dark text-brand-cream rounded-3xl p-10 flex flex-col items-center gap-8 shadow-2xl md:hidden z-50"
+              className="absolute top-full mt-4 left-6 right-6 bg-brand-dark text-brand-cream rounded-3xl p-10 flex flex-col items-center gap-8 shadow-2xl md:hidden z-50"
             >
               {NAV_LINKS.map((link) => (
                 <a 
