@@ -11,7 +11,7 @@ export default function App() {
   const whatsappNumber = "917907792467"
   const logoUrl = "//i.ibb.co/hFKpty9W/3213.png"
   const artistProfileUrl = "//i.ibb.co/Wpk6wbZ0/ammu.png";
-  const heroArtUrl = "//i.ibb.co/qqJbrLD/Whats-App-Image-2026-05-01-at-1-16-56-PM-1.jpg";
+  // const heroArtUrl = "//i.ibb.co/qqJbrLD/Whats-App-Image-2026-05-01-at-1-16-56-PM-1.jpg"; // Unused
   const [selectedArt, setSelectedArt] = useState<typeof ARTWORKS[0] | null>(null);
   const [isConsultFormOpen, setIsConsultFormOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
@@ -73,6 +73,8 @@ export default function App() {
             <SafeImage 
               src={logoUrl} 
               alt="Logo" 
+              width={168}
+              height={168}
               className={`w-auto transition-all duration-500 ${scrolled ? 'h-12 md:h-24' : 'h-16 md:h-42'}`} 
             />
             <span className="font-roboto text-[10px] font-bold tracking-[0.4em] uppercase hidden sm:block opacity-60">MURAL DHARA</span>
@@ -132,7 +134,7 @@ export default function App() {
 
       <main className="relative">
         {/* Subtle texture overlay */}
-        <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
+        <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[5] bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
 
         {/* Hero Section */}
         <section 
@@ -348,7 +350,13 @@ export default function App() {
                          animate={{ opacity: 0.15 }}
                          className="w-28 opacity-20 filter grayscale contrast-125"
                        >
-                         <SafeImage src={logoUrl} alt="Mug Brand" className="w-full h-auto object-contain" />
+                         <SafeImage 
+                           src={logoUrl} 
+                           alt="Mug Brand" 
+                           width={112} 
+                           height={112} 
+                           className="w-full h-auto object-contain" 
+                         />
                        </motion.div>
                        <div className="w-16 h-[1px] bg-brand-dark/5 rounded-full mt-6 mb-6" />
                     </div>
@@ -434,10 +442,12 @@ export default function App() {
                     onClick={() => setSelectedArt(art)}
                   >
                     <div className="relative mb-8 overflow-hidden rounded-[2.5rem] shadow-xl transform transition-all duration-1000 group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.35)]">
-                      <div className={`relative ${aspect} overflow-hidden`}>
+                      <div className={`relative ${aspect} overflow-hidden bg-brand-dark/5 rounded-[2.5rem]`}>
                         <SafeImage 
                           src={art.src} 
                           alt={art.title} 
+                          width={art.width}
+                          height={art.height}
                           className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/60 transition-all duration-700 backdrop-blur-0 group-hover:backdrop-blur-sm flex flex-col justify-end p-12 text-white opacity-0 group-hover:opacity-100">
@@ -476,9 +486,15 @@ export default function App() {
                   whileInView={{ opacity: 1, rotate: 0 }}
                   transition={{ duration: 1 }}
                   viewport={{ once: true }}
-                  className="rounded-[3rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/5]"
+                  className="rounded-[3rem] overflow-hidden shadow-2xl relative z-10 aspect-[4/5] bg-brand-dark/5"
                 >
-                  <SafeImage src={artistProfileUrl} alt="Artist Profile" className="w-full h-full object-cover" />
+                  <SafeImage 
+                    src={artistProfileUrl} 
+                    alt="Aswathi Narayanan" 
+                    width={800}
+                    height={1000}
+                    className="w-full h-full object-cover" 
+                  />
                 </motion.div>
                 <div className="absolute -bottom-8 -right-8 bg-brand-dark text-brand-cream p-10 rounded-[2.5rem] shadow-2xl max-w-[240px] z-20">
                    <p className="text-4xl font-serif italic text-brand-gold mb-2 leading-tight">Aswathi Narayanan</p>
@@ -546,6 +562,8 @@ export default function App() {
                   <SafeImage 
                     src={art.src} 
                     alt="Instagram Post" 
+                    width={art.width}
+                    height={art.height}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white gap-4">
@@ -644,10 +662,12 @@ export default function App() {
                    {/* Upcoming / In Progress Preview */}
                    <div className="mt-12 pt-8 border-t border-brand-pink/10">
                       <div className="flex items-center gap-6 group/wip">
-                         <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden shadow-xl border border-brand-pink/20">
+                         <div className="relative w-24 h-24 shrink-0 rounded-2xl overflow-hidden shadow-xl border border-brand-pink/20 bg-brand-dark/5">
                             <SafeImage 
                                src="//i.ibb.co/fz5zQMTL/Screenshot-2026-04-30-at-8-00-44-PM-2.png" 
                                alt="In Progress"
+                               width={96}
+                               height={96}
                                className="w-full h-full object-cover grayscale-[0.8] group-hover/wip:grayscale-0 group-hover/wip:scale-110 transition-all duration-700"
                             />
                             <div className="absolute inset-0 bg-brand-dark/20 flex items-center justify-center opacity-0 group-hover/wip:opacity-100 transition-opacity">
@@ -673,7 +693,13 @@ export default function App() {
       <footer className="py-12 bg-brand-cream">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-brand-dark/5 pt-12">
            <div className="flex items-center gap-3">
-              <SafeImage src={logoUrl} alt="Logo" className="h-8 w-auto" />
+              <SafeImage 
+                src={logoUrl} 
+                alt="Logo Small" 
+                width={32}
+                height={32}
+                className="h-8 w-auto" 
+              />
               <p className="text-[10px] font-bold uppercase tracking-widest text-brand-dark/40 italic">Mural Dhara Artistry</p>
            </div>
            <div className="flex gap-10">
@@ -837,8 +863,14 @@ export default function App() {
                 <X size={24} />
               </button>
 
-              <div className="md:w-2/3 h-[50vh] md:h-auto overflow-hidden bg-brand-cream relative group">
-                <SafeImage src={selectedArt.src} alt={selectedArt.title} className="w-full h-full object-cover transition-transform duration-[3s] hover:scale-105" />
+              <div className="md:w-2/3 h-[50vh] md:h-auto overflow-hidden bg-brand-cream relative group flex items-center justify-center">
+                <SafeImage 
+                  src={selectedArt.src} 
+                  alt={selectedArt.title} 
+                  width={selectedArt.width}
+                  height={selectedArt.height}
+                  className="w-full h-full object-cover transition-transform duration-[3s] hover:scale-105" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
               </div>
 
@@ -881,10 +913,10 @@ export default function App() {
         href={`https://wa.me/${whatsappNumber}`}
         target="_blank"
         rel="noreferrer"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
         whileHover={{ scale: 1.1, translateY: -5 }}
-        className="fixed bottom-10 right-10 z-[100] bg-[#25D366] text-white p-5 rounded-full shadow-2xl flex items-center justify-center"
+        className="fixed bottom-10 right-10 z-[110] bg-[#25D366] text-white p-5 rounded-full shadow-2xl flex items-center justify-center"
       >
         <MessageCircle size={32} />
         <motion.div 
